@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1607433485358",
+    "Statement": [
+        {
+            "Sid": "Stmt1607433470780",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:ListBucket",
+                "s3:PutBucketPolicy",
+                "s3:GetBucketPolicy"
+            ],
+            "Resource": "arn:aws:s3:::historico-atendimento"
+        },
+        {
+            "Sid": "2",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EDD3JPONMHK6N"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::historico-atendimento/*"
+        },
+        {
+            "Sid": "3",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EDD3JPONMHK6N"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::historico-atendimento/*"
+        }
+    ]
+}
