@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >-
+  An Amazon S3 trigger that retrieves metadata for the object that has been
+  updated.
+Resources:
+  Salvametadadofunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Description: >-
+        An Amazon S3 trigger that retrieves metadata for the object that has
+        been updated.
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::655743737011:role/service-role/salva-metadado'
+      Events:
+        BucketEvent1:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: Bucket1
+            Events:
+              - 's3:ObjectCreated:Post'
+              - 's3:ObjectCreated:Put'
+              - 's3:ObjectCreated:CompleteMultipartUpload'
+      Environment:
+        Variables:
+          MONGODB_COLLECTION: historico-atendimento
+          MONGODB_DATABASE: historico
+          MONGODB_URI: >-
+            mongodb+srv://s3-admin:s3-admin@teste-s3.rfk4x.mongodb.net/historico?retryWrites=true&w=majority
+      Tags:
+        'lambda-console:blueprint': s3-get-object
+  Bucket1:
+    Type: 'AWS::S3::Bucket'
