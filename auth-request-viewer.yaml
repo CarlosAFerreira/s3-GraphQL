@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Blueprint for returning HTTP redirect implemented in NodeJS.
+Resources:
+  authrequestviewer:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Description: Blueprint for returning HTTP redirect implemented in NodeJS.
+      MemorySize: 128
+      Timeout: 1
+      Role: 'arn:aws:iam::655743737011:role/service-role/auth-request-viewer'
+      Tags:
+        'lambda-console:blueprint': cloudfront-http-redirect
